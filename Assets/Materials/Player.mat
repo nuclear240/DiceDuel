@@ -48,12 +48,12 @@ Material:
     - _SwordInFront: 0
     m_Colors:
     - _ArmorColor: {r: 0.745283, g: 0.43160313, b: 0, a: 1}
-    - _Cloth: {r: 0.2735849, g: 0.21293165, b: 0.21293165, a: 1}
+    - _Cloth: {r: 0.1509434, g: 0.1509434, b: 0.1509434, a: 1}
     - _Lines: {r: 0, g: 0, b: 0, a: 1}
-    - _MinorArmorColor: {r: 0.4523764, g: 1.3866183, b: 7.377212, a: 1}
-    - _Pants: {r: 0.74509805, g: 0.43137255, b: 0, a: 1}
+    - _MinorArmorColor: {r: 48.188248, g: 766.9962, b: 100.85468, a: 1}
+    - _Pants: {r: 0.74509805, g: 0.054925326, b: 0, a: 1}
     - _Shirt: {r: 0, g: 1, b: 0.9284022, a: 1}
-    - _Trail: {r: 0.74509805, g: 0.43137255, b: 0, a: 1}
+    - _Trail: {r: 762.9804, g: 0.000075795295, b: 0, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &3002970443287566438
@@ -68,4 +68,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  version: 9
+  version: 10

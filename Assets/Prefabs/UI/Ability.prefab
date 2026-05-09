@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2247631320751770175}
   - component: {fileID: 7546387981922573111}
-  - component: {fileID: 7879735645237986584}
+  - component: {fileID: 4752379849767864615}
   m_Layer: 3
   m_Name: DragAndDropArea
   m_TagString: Untagged
@@ -61,7 +61,7 @@ MonoBehaviour:
   m_Spacing: {x: -6, y: -6}
   m_Constraint: 0
   m_ConstraintCount: 2
---- !u!114 &7879735645237986584
+--- !u!114 &4752379849767864615
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -70,10 +70,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 765370757697708402}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c3ea7e44290f66439848e223cb1d105, type: 3}
+  m_Script: {fileID: 11500000, guid: 34285467e4b651446968061c78ee6b00, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
-  rectTransform: {fileID: 5817274005804685016}
+  m_EditorClassIdentifier: Assembly-CSharp::dropzone
+  IDK: {fileID: 2247631320751770175}
+  allowed:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &1529150250644375022
 GameObject:
   m_ObjectHideFlags: 0
@@ -139,7 +142,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5f5de99a123dbcb41aa99ee72912c00e, type: 3}
+  m_Sprite: {fileID: 5146522613825122025, guid: aff4ae2e67518fb489253627d1bf7a4a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -160,7 +163,7 @@ GameObject:
   - component: {fileID: 4086465676413109480}
   - component: {fileID: 7925705555231598998}
   - component: {fileID: 6738107183718635220}
-  - component: {fileID: 271171762317819315}
+  - component: {fileID: 1154167062801254926}
   m_Layer: 0
   m_Name: Ability
   m_TagString: Untagged
@@ -181,9 +184,9 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7185437853900116936}
-  - {fileID: 2247631320751770175}
-  - {fileID: 9017655676021200662}
   - {fileID: 5817274005804685016}
+  - {fileID: 557047366504874878}
+  - {fileID: 2247631320751770175}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -229,7 +232,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &271171762317819315
+--- !u!114 &1154167062801254926
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -238,12 +241,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1916363461338771845}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d501e02b928dc045896cb1510b37696, type: 3}
+  m_Script: {fileID: 11500000, guid: 4bce918300ec6904285a023120017c13, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
-  effectiveRange: {fileID: 3313676401218279023}
+  m_EditorClassIdentifier: Assembly-CSharp::AbilityUI
   icon: {fileID: 2140484029940361073}
---- !u!1 &2913215217195034471
+  bruv: {fileID: 8547709072760693059}
+  currentability: {fileID: 0}
+--- !u!1 &2858684983492942555
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -251,58 +255,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5817274005804685016}
+  - component: {fileID: 557047366504874878}
+  - component: {fileID: 2651163339052680322}
+  - component: {fileID: 8547709072760693059}
   m_Layer: 0
-  m_Name: DragAndDropHitbox
+  m_Name: value
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &5817274005804685016
+--- !u!224 &557047366504874878
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2913215217195034471}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4086465676413109480}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &6151936248266151063
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 9017655676021200662}
-  - component: {fileID: 1853728824961650503}
-  - component: {fileID: 3313676401218279023}
-  m_Layer: 0
-  m_Name: Value
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &9017655676021200662
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6151936248266151063}
+  m_GameObject: {fileID: 2858684983492942555}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -312,29 +281,29 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -75, y: -40}
-  m_SizeDelta: {x: 75, y: 30}
+  m_AnchoredPosition: {x: 28, y: -51.8}
+  m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &1853728824961650503
+--- !u!222 &2651163339052680322
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6151936248266151063}
+  m_GameObject: {fileID: 2858684983492942555}
   m_CullTransparentMesh: 1
---- !u!114 &3313676401218279023
+--- !u!114 &8547709072760693059
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6151936248266151063}
+  m_GameObject: {fileID: 2858684983492942555}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
@@ -370,15 +339,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.25
-  m_fontSizeBase: 0.25
+  m_fontSize: 25
+  m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 0
-  m_fontSizeMin: 12
-  m_fontSizeMax: 20
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -414,6 +383,41 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &2913215217195034471
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5817274005804685016}
+  m_Layer: 0
+  m_Name: DragAndDropHitbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5817274005804685016
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2913215217195034471}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4086465676413109480}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6669181347104896106
 GameObject:
   m_ObjectHideFlags: 0
