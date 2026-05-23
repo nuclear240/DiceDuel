@@ -1,6 +1,7 @@
 using Given.Manager;
 using System;
 using System.Collections.Generic;
+using UnityEditor.Build.Content;
 using UnityEngine;
 
 public class AbilityManager : MonoBehaviour
@@ -43,5 +44,19 @@ public class AbilityManager : MonoBehaviour
         activeAbilitiesList.Clear();
         this.activeAbilities = activeAbilities;
         createUI();
+    }
+
+    internal List<AbilityData> retreaveData(playerchar playerchar)
+    {
+      List<AbilityData> Btuhuh = new List<AbilityData>();
+
+        foreach(AbilityUI ui in activeAbilitiesList)
+        {
+            Btuhuh.Add(new AbilityData(ui.currentability, playerchar, ui.Dice.ToArray(), 0));
+        }
+
+
+
+        return Btuhuh;
     }
 }

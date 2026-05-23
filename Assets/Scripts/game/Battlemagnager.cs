@@ -27,14 +27,16 @@ public class Battlemagnager
     {
         leftCharacter.Initialise();
         rightCharacter.Initialise();
+        leftCharacter.target = rightCharacter;
+        rightCharacter.target = leftCharacter;
 
         while(BattleIsRunnning())
         {
             leftCharacter.StartRound();
             rightCharacter.StartRound();
             await UniTask.WhenAll(leftCharacter.DewTurn(), rightCharacter.DewTurn());
-            
-           
+            await UniTask.WhenAll(leftCharacter.RollDice(), rightCharacter.RollDice());
+
             leftCharacter.EndRound();
             rightCharacter.EndRound();
             await UniTask.Delay(5000);

@@ -30,10 +30,10 @@ public abstract class AnilityBase : ScriptableObject
 
 public struct AbilityData
 {
-    public readonly AnilityBase bility;
-    public readonly IWarrior warrior;
-    public readonly EDiceType[] dicee;
-    public readonly int value;
+    public AnilityBase bility;
+    public IWarrior warrior;
+    public  EDiceType[] dicee;
+    public  int value;
     public AbilityData(AnilityBase bility, IWarrior warrioir, EDiceType[] dicee, int value)
     {
         this.warrior = warrioir;

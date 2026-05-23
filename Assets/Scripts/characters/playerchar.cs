@@ -1,16 +1,29 @@
 using Cysharp.Threading.Tasks;
+using System;
 using UnityEngine;
 
 public class playerchar : basechar
 {
+    bool IsTurnRunning = false;
+    [SerializeField] Canvas Button;
+
+
+
     [SerializeField] AbilityManager abilityManager;
 
     public override async UniTask DewTurn() {
 
-        
-        await RollDice();
+        IsTurnRunning = true;
+        Button.enabled = true;
+        await UniTask.WaitWhile(TurnRunning);
+       abilities =  abilityManager.retreaveData(this);
     
 }
+
+    private bool TurnRunning()
+    {
+        return IsTurnRunning;
+    }
 
     public override void Initialise()
     {
@@ -19,6 +32,11 @@ public class playerchar : basechar
         abilityManager.GenerateDiceUI(DiceToRoll);
     }
 
+    public void CompleteTurn()
+    {
+        Button.enabled = false;
+        IsTurnRunning = false;
 
+    }
 
 }

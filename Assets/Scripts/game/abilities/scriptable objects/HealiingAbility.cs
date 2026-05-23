@@ -1,8 +1,8 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "DefendAbitity", menuName = "Ability/DefendAbitity")]
-public class DefendAbitity : AnilityBase
+[CreateAssetMenu(fileName = "HealingAbility", menuName = "Ability/HealingAbility")]
+public class HealingAbility : AnilityBase
 {
     [SerializeField] private ParticleSystem controlableparticlesystem;
 
@@ -10,7 +10,7 @@ public class DefendAbitity : AnilityBase
 
     public override UniTask StartAbilityImplementation(AbilityData DATA, IWarrior enemy)
     {
-        DATA.warrior.Shield += DATA.value;
+        DATA.warrior.Heal(DATA.value);
 
         if (DATA.warrior is basechar player)
         {

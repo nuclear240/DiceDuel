@@ -25,12 +25,12 @@ public class DiceUI : MonoBehaviour
     private void UpdateAbility(dropzone dropzone)
     {
         current?.removeDice(diceType);
-        AbilityUI idkagain = dropzone.GetComponent<AbilityUI>();
+       current = dropzone.GetComponentInParent<AbilityUI>();
 
-        if (idkagain != null)
+        if (current != null)
         {
-            idkagain.addDice(diceType);
-            current = idkagain;
+            current.addDice(diceType);
+            
 
         }
     }

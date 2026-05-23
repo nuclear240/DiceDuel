@@ -4,11 +4,16 @@ using UnityEngine;
 
 public interface IWarrior
 {
+    IWarrior target { get; set; }
+    int Shield { get; set; }
+
     void EndRound();
     bool IsAlive();
     UniTask DewTurn();
+    UniTask RollDice();
     void StartRound();
-    void TakeDamage();
+    void TakeDamage(int value);
     EDiceType[] GetBattleDice();
     void Initialise();
+    int Heal(int value);
 }

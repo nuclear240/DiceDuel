@@ -6,8 +6,18 @@ public class aichar : basechar
 {
     public override async UniTask DewTurn()
     {
-        await RollDice();
+
+        AnilityBase btuh = activeAbilitied[Random.Range(0, activeAbilitied.Length)];
+        abilities.Add(new AbilityData (
         
+             btuh,
+             this,
+             DiceToRoll,
+            0
+
+
+        ));
+        await UniTask.CompletedTask; 
 
     }
 }

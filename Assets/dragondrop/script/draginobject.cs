@@ -54,10 +54,11 @@ public class draginobject : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         if (curerentTarget && curerentTarget.CanAcceptItem(this))
         {
 
-        transform.SetParent(previousTarget.transform);
+        transform.SetParent(curerentTarget.transform);
+            OnDropZoneChanged?.Invoke(curerentTarget);
             previousTarget = curerentTarget;
             curerentTarget = null;
-            OnDropZoneChanged?.Invoke(curerentTarget);
+           
 
         } else if (previousTarget) 
         {
@@ -78,6 +79,6 @@ public class draginobject : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             return;
         }
 
-        previousTarget = dropzone;
+        curerentTarget = dropzone;
     }
 }

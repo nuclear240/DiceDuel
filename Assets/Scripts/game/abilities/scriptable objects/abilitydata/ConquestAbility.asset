@@ -16,3 +16,4 @@ MonoBehaviour:
   color: {r: 1, g: 0, b: 0.7990017, a: 0}
   costsMaxStamina: 1
   abilityPriority: 3
+  worm: {fileID: 8300000, guid: 3eff0ee92c8815b439507971f00f15d1, type: 3}

@@ -1,6 +1,8 @@
 using Cysharp.Threading.Tasks;
 using Game.Battle.Character;
 using Given.Manager;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -15,7 +17,11 @@ public abstract class basechar : MonoBehaviour, IWarrior
    private int currentStamina;
    private int currentHealth;
    private int currentMaxStamina;
-   [SerializeField] protected AnilityBase[] activeAbilitied;
+    [SerializeField] protected AnilityBase[] activeAbilitied;
+    public List<AbilityData> abilities = new List<AbilityData>();
+
+    public IWarrior target { get; set; }
+    public int Shield { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
     public virtual void Initialise()
     {
@@ -29,31 +35,49 @@ public abstract class basechar : MonoBehaviour, IWarrior
     {
         
     }
-    protected async UniTask RollDice ()
+    public async UniTask RollDice ()
     {
-        UniTask<int>[] tasks = new UniTask<int>[DiceToRoll.Length];
+        for (int j = 0; j < abilities.Count; ++ j)
+        {
+            AbilityData Ability = abilities[j];
 
-        for (int i = 0; i <DiceToRoll.Length; i += 1) {
-       Dice dice = DiceManager.Instance.CreateDice(DiceToRoll[i], transform.position.x < 0, diceGlow, textGlow);
 
-            tasks[i] = dice.Roll(dice.transform.forward);
-        
-        }
-        
+            UniTask<int>[] tasks = new UniTask<int>[Ability.dicee.Length];
+
+            for (int i = 0; i < Ability.dicee.Length; i += 1)
+            {
+                Dice dice = DiceManager.Instance.CreateDice(Ability.dicee[i], transform.position.x < 0, Ability.bility.Color, textGlow);
+
+                tasks[i] = dice.Roll(dice.transform.forward);
+
+            }
+
             int[] num = await UniTask.WhenAll(tasks);
 
-        int sum  = 0;
+            int sum = 0;
 
-               for (int i = 0; i < num.Length; i += 1)
-        {
-            sum += num[i];
+            for (int i = 0; i < num.Length; i += 1)
+            {
+                sum += num[i];
 
+            }
+            Debug.Log($"Player Rolled for {Ability.bility.name} with {sum}", gameObject);
+            //Debug.Log($"Mean {num.AverageMean()}" );
+            //Debug.Log($"Medium {num.AverageMedian()}");
+            //Debug.Log($"Mode {num.AverageMode()}");
+            GraphManager.Instance?.RegisterRoll(Ability.dicee, sum);
+            Ability.value = sum;
+            abilities[j] = Ability;
+           
         }
-        Debug.Log($"Player Rolled  {sum}", gameObject);
-        Debug.Log($"Mean {num.AverageMean()}" );
-        Debug.Log($"Medium {num.AverageMedian()}");
-        Debug.Log($"Mode {num.AverageMode()}");
-        GraphManager.Instance?.RegisterRoll(GetBattleDice(), sum);
+       abilities =  abilities.OrderBy(a => a.bility.AbilityPriority).ToList();
+
+        for (int j = 0; j < abilities.Count; ++j)
+        {
+            AbilityData Ability = abilities[j];
+            await Ability.bility.StartAbility(Ability, target);
+        }
+            abilities.Clear();
     }
     void RoundEnd ()
     {
@@ -80,7 +104,7 @@ public abstract class basechar : MonoBehaviour, IWarrior
     
     }
 
-    public void TakeDamage()
+    public void TakeDamage(int value)
     {
         
     }
@@ -88,5 +112,10 @@ public abstract class basechar : MonoBehaviour, IWarrior
     public EDiceType[] GetBattleDice()
     {
         return DiceToRoll;
+    }
+
+    public int Heal(int value)
+    {
+        throw new System.NotImplementedException();
     }
 }

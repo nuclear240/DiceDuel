@@ -10,7 +10,7 @@ public class AbilityUI : MonoBehaviour
 {
     [SerializeField] private UnityEngine.UI.Image icon;
     [SerializeField] private TextMeshProUGUI bruv;
-    [SerializeField] private AnilityBase currentability;
+    [field: SerializeField] public AnilityBase currentability { get; private set; }
     private int low;
     private int high;
     public int Low
@@ -18,16 +18,16 @@ public class AbilityUI : MonoBehaviour
         get => low; private set
         {
             low = value;
-            bruv.text = $"{Low}-{High}";
+            bruv.text = GenerateFancyText(low, high);
         }
     }
-
+    
     public int High
     {
         get => high; private set
         {
             high = value;
-            bruv.text = $"{Low}-{High}";
+            bruv.text = GenerateFancyText(low, high);
         }
     }
 
@@ -142,11 +142,10 @@ public class AbilityUI : MonoBehaviour
         // Calculate font size
         float fontSize = GetFontSize(value);
 
-        // Calculate a vertical offset to center smaller text
-        float verticalOffset = 0.5f * (1.0f - fontSize); // Adjust offset based on font size
+       
 
         // Apply size, color, and vertical offset to the value
-        return $"<align=center><voffset={verticalOffset}em><size={fontSize}><color={GetColor(value)}>{value}</color></size></voffset></align>";
+        return $"<align=center><size={fontSize}><color={GetColor(value)}>{value}</color></size></align>";
     }
 
     // Method to format the value with the appropriate color and font size for TMP
@@ -155,11 +154,10 @@ public class AbilityUI : MonoBehaviour
         // Calculate font size
         float fontSize = GetFontSize(value);
 
-        // Calculate a vertical offset to center smaller text
-        float verticalOffset = 0.5f * (1.0f - fontSize); // Adjust offset based on font size
+   
 
         // Apply size, color, and vertical offset to the value
-        return $"<align=center><voffset={verticalOffset}em><size={fontSize}><color={GetColor(value)}>{text}</color></size></voffset></align>";
+        return $"<align=center><size={fontSize}><color={GetColor(value)}>{text}</color></size></align>";
     }
 
     private string ColorToHex(Color color)
