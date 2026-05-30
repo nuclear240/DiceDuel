@@ -497,16 +497,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::playerchar
   DiceToRoll: 0000000001000000020000000300000004000000
-  maxStamina: 0
-  maxHealth: 0
-  numberOfDice: 6
+  maxStamina: 1
+  maxHealth: 3
+  numberOfDice: 5
   textGlow: {r: 0, g: 0, b: 0, a: 1}
   diceGlow: {r: 1, g: 1, b: 1, a: 1}
   activeAbilitied:
   - {fileID: 11400000, guid: 8a7b0b473699ae544bcdfb7c34ba8038, type: 2}
   - {fileID: 11400000, guid: 4c9b8178e870a9341b16b5346d531134, type: 2}
   - {fileID: 11400000, guid: b1a4fb934735728439ae25fabc195d26, type: 2}
-  - {fileID: 11400000, guid: fdb40ad2279810146a3055e4840b10fe, type: 2}
+  - {fileID: 11400000, guid: aab7ba573e231f2459c3c309fc6c0fb4, type: 2}
   Button: {fileID: 969580970}
   abilityManager: {fileID: 1578865683}
 --- !u!1 &519420028
@@ -869,7 +869,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1546451326527393989, guid: b3b99c45c0940454eb4d199a8986edc0, type: 3}
       propertyPath: m_Volume
-      value: 0.022537917
+      value: 0.060000017
       objectReference: {fileID: 0}
     - target: {fileID: 4701323605350242271, guid: b3b99c45c0940454eb4d199a8986edc0, type: 3}
       propertyPath: m_LocalPosition.x

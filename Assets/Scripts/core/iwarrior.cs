@@ -15,5 +15,5 @@ public interface IWarrior
     void TakeDamage(int value);
     EDiceType[] GetBattleDice();
     void Initialise();
-    int Heal(int value);
+    void Heal(int value);
 }

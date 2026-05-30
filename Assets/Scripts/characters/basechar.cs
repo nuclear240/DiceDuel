@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using Game.Battle.Character;
 using Given.Manager;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -93,7 +94,7 @@ public abstract class basechar : MonoBehaviour, IWarrior
 
     public bool IsAlive()
     {
-        return true;
+        return currentHealth > 0;
     }
 
     public abstract UniTask DewTurn();
@@ -106,7 +107,38 @@ public abstract class basechar : MonoBehaviour, IWarrior
 
     public void TakeDamage(int value)
     {
+        // first, it checks if the health is > 0.
+        // Then it also checks if we got hit and how much damage was done. if health =< 0, the player dies.
         
+
+
+        if (value <= 0) return;
+
+        int DamageToFlesh = Shield - value;
+
+        if (!IsAlive())
+        {
+            Die();
+        }
+
+        if (DamageToFlesh >= 0)
+        {
+            // attack was blocked. Play sound effex + particled
+            Shield -= value;
+        }
+        else
+        {
+            //attack was NOT blocked
+            currentHealth = currentHealth + Shield - DamageToFlesh;
+            Shield = 0;
+
+        }
+    }
+
+    protected virtual void Die()
+    {
+        // cs2 ragdoll gif + play sound
+        Debug.Log("weded", gameObject);
     }
 
     public EDiceType[] GetBattleDice()
@@ -114,8 +146,18 @@ public abstract class basechar : MonoBehaviour, IWarrior
         return DiceToRoll;
     }
 
-    public int Heal(int value)
+    public void Heal(int value)
     {
-        throw new System.NotImplementedException();
+        // heal sum helth + play tf2 
+        currentHealth = currentHealth + value;
+
+        if (currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+
     }
 }
+
+
+
