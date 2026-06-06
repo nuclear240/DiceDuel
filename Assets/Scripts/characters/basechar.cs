@@ -27,7 +27,7 @@ public abstract class basechar : MonoBehaviour, IWarrior
     public List<AbilityData> abilities = new List<AbilityData>();
 
     public IWarrior target { get; set; }
-    public int Shield { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+    public int Shield { get; set; }
 
     public virtual void Initialise()
     {

@@ -103,4 +103,24 @@ public static class mathutility {
 
         return factorial(n, n - k) / factorial(k);
     }
+
+    public static void Shuffle<t>(this t[] array)
+    {
+
+        
+        int n = array.Length;
+        while (n > 1)
+        
+        {
+
+            n--;
+            int k = UnityEngine.Random.Range(0, n+1);
+            (array[k], array[n]) = (array[n], array[k]);
+
+        }
+
+
+    }
+
+
 }

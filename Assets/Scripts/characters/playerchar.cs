@@ -20,7 +20,7 @@ public class playerchar : basechar
     
 }
 
-    private bool TurnRunning()
+    public bool TurnRunning()
     {
         return IsTurnRunning;
     }
