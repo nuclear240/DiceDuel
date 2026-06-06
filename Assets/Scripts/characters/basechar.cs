@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UIElements;
 
 public abstract class basechar : MonoBehaviour, IWarrior
@@ -18,7 +19,11 @@ public abstract class basechar : MonoBehaviour, IWarrior
    private int currentStamina;
    private int currentHealth;
    private int currentMaxStamina;
+    protected AudioSource autosourse;
     [SerializeField] protected AnilityBase[] activeAbilitied;
+    [SerializeField] private AudioResource hurtSong;
+    [SerializeField] private AudioResource blov;
+    [SerializeField] private AudioResource help;
     public List<AbilityData> abilities = new List<AbilityData>();
 
     public IWarrior target { get; set; }
@@ -29,6 +34,8 @@ public abstract class basechar : MonoBehaviour, IWarrior
         currentHealth = maxHealth;
         currentStamina = maxStamina;
         currentMaxStamina = maxStamina;
+        autosourse = GetComponent<AudioSource>();
+
 
 
     }
@@ -125,13 +132,16 @@ public abstract class basechar : MonoBehaviour, IWarrior
         {
             // attack was blocked. Play sound effex + particled
             Shield -= value;
+            autosourse.resource = blov;
+            autosourse.Play();
         }
         else
         {
             //attack was NOT blocked
             currentHealth = currentHealth + Shield - DamageToFlesh;
             Shield = 0;
-
+            autosourse.resource = hurtSong;
+            autosourse.Play();
         }
     }
 
@@ -156,7 +166,14 @@ public abstract class basechar : MonoBehaviour, IWarrior
             currentHealth = maxHealth;
         }
 
+        autosourse.resource = help;
+        autosourse.Play();
     }
+
+
+    public int MaxHealth => maxHealth;
+    public int CurrentHealth => currentHealth;
+    public int shield => Shield;
 }
 
 
