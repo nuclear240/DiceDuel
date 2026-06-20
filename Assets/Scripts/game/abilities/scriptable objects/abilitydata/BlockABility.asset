@@ -16,3 +16,4 @@ MonoBehaviour:
   color: {r: 1, g: 0.2501845, b: 0, a: 0}
   costsMaxStamina: 0
   abilityPriority: 2
+  controlableparticlesystem: {fileID: 1484037191169887610, guid: 6642f53d37c9eb54e84a8b3f070bfc32, type: 3}
