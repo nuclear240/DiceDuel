@@ -21,13 +21,15 @@ public class aichar : basechar
             await UniTask.WaitWhile(playerchar.TurnRunning);
         }
 
-        abilities.AddRange(AssingDice());
+        var assigned = AssingDice();
 
-        
+        string counts = "";
+        foreach (var a in assigned)
+            counts += a.dicee.Length + ",";
+        Debug.Log($"AI assigned {assigned.Length} abilities, dice counts: {counts}", gameObject);
 
-       
-
-        await UniTask.CompletedTask; 
+        abilities.AddRange(assigned);
+        Debug.Log("AI Turn Complete", gameObject);
 
     }
 
@@ -56,13 +58,16 @@ public class aichar : basechar
         for (int j = 0; j < activeAbilitied.Length; j++)
         {
             AnilityBase item = activeAbilitied[j];
-            int DiceRoll = UnityEngine.Random.Range(0, DiceToRoll.Length-Index);
+            int remaining = DiceToRoll.Length - Index;
+            bool isLast = j == activeAbilitied.Length - 1;
+            int DiceRoll = isLast ? remaining : UnityEngine.Random.Range(0, remaining + 1);
             EDiceType[] dicee = new EDiceType[DiceRoll];
-            for (int p = Index; p < Index+DiceRoll;  p++)
+            for (int p = Index; p < Index + DiceRoll; p++)
             {
                 dicee[p - Index] = DiceToRoll[p];
             }
-            data[j] = new AbilityData(item,target, dicee, 0);
+            Index += DiceRoll;
+            data[j] = new AbilityData(item, target, dicee, 0);
         }
         return data;
     }

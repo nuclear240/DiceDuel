@@ -25,22 +25,41 @@ public class Battlemagnager
     }
     private async UniTaskVoid PlayBattle()
     {
-        leftCharacter.Initialise();
-        rightCharacter.Initialise();
         leftCharacter.target = rightCharacter;
         rightCharacter.target = leftCharacter;
+        
+        leftCharacter.Initialise();
+        rightCharacter.Initialise();
 
+        Debug.Log("Game Start");
+
+        
         while(BattleIsRunnning())
         {
+            Debug.Log("Round start");
+
             leftCharacter.StartRound();
             rightCharacter.StartRound();
+            
+            Debug.Log("Do Turn");
+            
             await UniTask.WhenAll(leftCharacter.DewTurn(), rightCharacter.DewTurn());
+            
+            Debug.Log("Roll Dice");
+            
             await UniTask.WhenAll(leftCharacter.RollDice(), rightCharacter.RollDice());
 
+            Debug.Log("End Turn");
+            
             leftCharacter.EndRound();
             rightCharacter.EndRound();
-            await UniTask.Delay(5000);
+            
+            Debug.Log("Round Complete");
+            
         }
+        
+        Debug.Log($"Battle has ended. Left is alive? {leftCharacter.IsAlive()}, Right is alive? {rightCharacter.IsAlive()}");
+
     }
 
     private bool BattleIsRunnning()

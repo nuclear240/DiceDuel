@@ -330,9 +330,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::aichar
   DiceToRoll: 0000000001000000020000000300000004000000
-  maxStamina: 0
-  maxHealth: 0
-  numberOfDice: 0
+  maxStamina: 1
+  maxHealth: 3
   textGlow: {r: 0, g: 0, b: 0, a: 1}
   diceGlow: {r: 1, g: 1, b: 1, a: 1}
   activeAbilitied:
@@ -343,6 +342,7 @@ MonoBehaviour:
   hurtSong: {fileID: 6418180475301049370, guid: 5c1778a567b696e49a01d0fcea1b4624, type: 2}
   blov: {fileID: 6418180475301049370, guid: 8100b680b0e32a14bbd6960d249a2048, type: 2}
   help: {fileID: 6418180475301049370, guid: 03be10c3cc283cb4db6882ea3458aeab, type: 2}
+  aIType: 0
 --- !u!82 &105240941
 AudioSource:
   m_ObjectHideFlags: 0
@@ -677,7 +677,6 @@ MonoBehaviour:
   DiceToRoll: 0000000001000000020000000300000004000000
   maxStamina: 1
   maxHealth: 3
-  numberOfDice: 5
   textGlow: {r: 0, g: 0, b: 0, a: 1}
   diceGlow: {r: 1, g: 1, b: 1, a: 1}
   activeAbilitied:
@@ -1886,6 +1885,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CharUI
   owner: {fileID: 508118905}
   helth: {fileID: 1939511170}
+  text: {fileID: 1222075942}
 --- !u!1 &1222075940
 GameObject:
   m_ObjectHideFlags: 0

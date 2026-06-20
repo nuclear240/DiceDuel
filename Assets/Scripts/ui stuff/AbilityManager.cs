@@ -1,7 +1,5 @@
 using Given.Manager;
-using System;
 using System.Collections.Generic;
-using UnityEditor.Build.Content;
 using UnityEngine;
 
 public class AbilityManager : MonoBehaviour

@@ -13,7 +13,6 @@ public abstract class basechar : MonoBehaviour, IWarrior
    [SerializeField] protected EDiceType[] DiceToRoll;
    [SerializeField] private int maxStamina;
    [SerializeField] private int maxHealth;
-   [SerializeField] private int numberOfDice;
    [SerializeField] private Color textGlow = new Color(0,0,0);
    [SerializeField] private Color diceGlow = new Color(0, 1, 1);
    private int currentStamina;
@@ -31,14 +30,63 @@ public abstract class basechar : MonoBehaviour, IWarrior
 
     public virtual void Initialise()
     {
+        ValidateAssignments();
+
         currentHealth = maxHealth;
         currentStamina = maxStamina;
         currentMaxStamina = maxStamina;
         autosourse = GetComponent<AudioSource>();
 
-
+        Debug.Log($"Initialized: {currentHealth}, {currentStamina}, {currentMaxStamina}");
 
     }
+
+    // Hard runtime check. Logs errors (with this GameObject as context, so clicking
+    // the log selects the offender) the moment a character tries to enter battle
+    // while misconfigured.
+    protected virtual void ValidateAssignments()
+    {
+        if (maxHealth <= 0)
+            Debug.LogError($"[{name}] maxHealth is {maxHealth}. Health must be > 0.", gameObject);
+
+        if (maxStamina <= 0)
+            Debug.LogError($"[{name}] maxStamina is {maxStamina}. Stamina must be > 0.", gameObject);
+
+        if (activeAbilitied == null || activeAbilitied.Length == 0)
+            Debug.LogError($"[{name}] activeAbilitied is empty. This character will roll nothing.", gameObject);
+        else if (activeAbilitied.Any(a => a == null))
+            Debug.LogError($"[{name}] activeAbilitied contains a null entry.", gameObject);
+
+        if (DiceToRoll == null || DiceToRoll.Length == 0)
+            Debug.LogError($"[{name}] DiceToRoll is empty. There are no dice to roll.", gameObject);
+
+        if (GetComponent<AudioSource>() == null)
+            Debug.LogError($"[{name}] No AudioSource component found. Heal/TakeDamage will throw.", gameObject);
+
+        if (hurtSong == null) Debug.LogWarning($"[{name}] hurtSong is unassigned.", gameObject);
+        if (blov == null)     Debug.LogWarning($"[{name}] blov is unassigned.", gameObject);
+        if (help == null)     Debug.LogWarning($"[{name}] help is unassigned.", gameObject);
+    }
+
+#if UNITY_EDITOR
+    // Editor-time check: fires whenever a value changes in the inspector, so a bad
+    // config is flagged before you ever press play.
+    protected virtual void OnValidate()
+    {
+        if (maxHealth <= 0)
+            Debug.LogWarning($"[{name}] maxHealth is {maxHealth}. It should be greater than 0.", gameObject);
+
+        if (maxStamina <= 0)
+            Debug.LogWarning($"[{name}] maxStamina is {maxStamina}. It should be greater than 0.", gameObject);
+
+        if (activeAbilitied == null || activeAbilitied.Length == 0)
+            Debug.LogWarning($"[{name}] activeAbilitied is empty. This character will roll nothing.", gameObject);
+
+        if (DiceToRoll == null || DiceToRoll.Length == 0)
+            Debug.LogWarning($"[{name}] DiceToRoll is empty. There are no dice to roll.", gameObject);
+    }
+#endif
+
     void RoundStart ()
     {
         
@@ -85,7 +133,10 @@ public abstract class basechar : MonoBehaviour, IWarrior
             AbilityData Ability = abilities[j];
             await Ability.bility.StartAbility(Ability, target);
         }
-            abilities.Clear();
+        abilities.Clear();
+            
+        Debug.Log($"Rolled Dice for {gameObject.name}", gameObject);
+
     }
     void RoundEnd ()
     {
@@ -175,6 +226,3 @@ public abstract class basechar : MonoBehaviour, IWarrior
     public int CurrentHealth => currentHealth;
     public int shield => Shield;
 }
-
-
-
