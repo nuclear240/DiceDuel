@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using Given.Manager;
 using System;
 using UnityEngine;
 
@@ -10,6 +11,8 @@ public class playerchar : basechar
 
 
     [SerializeField] AbilityManager abilityManager;
+
+    protected override EDiceType[] DiceToRoll { get; set; }
 
     public override async UniTask DewTurn() {
 
@@ -28,6 +31,8 @@ public class playerchar : basechar
 
     public override void Initialise()
     {
+        DiceToRoll = PlayerData.DiceInventory.ToArray();
+
         base.Initialise();
         abilityManager.RegenerateAbilities(activeAbilitied);
         abilityManager.GenerateDiceUI(DiceToRoll);

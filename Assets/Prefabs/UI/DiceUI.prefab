@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 1484088480350511779}
   - component: {fileID: 6043902431610175803}
   - component: {fileID: 369908056159819991}
+  - component: {fileID: 3516945953344290196}
+  - component: {fileID: 8977472543066399046}
   m_Layer: 3
   m_Name: DiceUI
   m_TagString: Untagged
@@ -104,3 +106,45 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DiceUI
   bruh: {fileID: 1484088480350511779}
+--- !u!114 &3516945953344290196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 908225284279996953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d392807d61b32e442bdf6995a8f24aa8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UI.Effects.UIEffectPlayer
+  effects:
+  - rid: 8300786592757579849
+  - rid: 8300786592757579850
+  references:
+    version: 2
+    RefIds:
+    - rid: 8300786592757579849
+      type: {class: UIRotateEffect, ns: UI.Effects, asm: Assembly-CSharp}
+      data:
+        target: {fileID: 1603211121887330974}
+        axis: {x: 0, y: 0, z: 1}
+        animationData: {fileID: 11400000, guid: c5eb4a7f83938a94b8feede2f1a1d4d7, type: 2}
+    - rid: 8300786592757579850
+      type: {class: UIScaleEffect, ns: UI.Effects, asm: Assembly-CSharp}
+      data:
+        target: {fileID: 1603211121887330974}
+        animationData: {fileID: 11400000, guid: 6d9c0b9d04b36e7458b30442a7472eee, type: 2}
+--- !u!114 &8977472543066399046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 908225284279996953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aa8ecd1f2229a14bbed8deebeab9279, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UI.Effects.UIHoverEffects
+  player: {fileID: 3516945953344290196}

@@ -10,7 +10,7 @@ using UnityEngine.UIElements;
 
 public abstract class basechar : MonoBehaviour, IWarrior
 {
-   [SerializeField] protected EDiceType[] DiceToRoll;
+    protected abstract EDiceType[] DiceToRoll { get; set; }
    [SerializeField] private int maxStamina;
    [SerializeField] private int maxHealth;
    [SerializeField] private Color textGlow = new Color(0,0,0);

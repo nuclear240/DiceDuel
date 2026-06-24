@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class aichar : basechar
 {
+     [field: SerializeField] protected override EDiceType[] DiceToRoll { get; set; }
     public enum EAIType
     {
         Random,

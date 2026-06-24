@@ -1,4 +1,5 @@
 using Given.Manager;
+using JetBrains.Annotations;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -25,11 +26,44 @@ public static class PlayerData
     public static void Save()
     {
         PlayerPrefs.SetInt("Gold", Gold);
-    }
+         string beuhuh = "";
 
+        for (int i = 0; i < DiceInventory.Count; i += 1)
+        {
+            beuhuh += DiceInventory[i];
+
+            if (i < DiceInventory.Count - 1)
+            {
+                beuhuh += ",";
+            }
+
+
+        }
+
+        PlayerPrefs.SetString("beuhuh", beuhuh);
+        PlayerPrefs.Save();
+    }
+    [RuntimeInitializeOnLoadMethod]
     public static void Load()
     {
+       
+        string beuhuh = PlayerPrefs.GetString("beuhuh","Twenty,Eight,Ten,Six,Four");
+        int Gold = PlayerPrefs.GetInt("Gold", 100);
+        string[] data = beuhuh.Split(",");
+        DiceInventory.Clear();
 
+        for (int i = 0; i < data.Length; i++)
+        {
+
+            if (EDiceType.TryParse(data[i], out EDiceType diceType))
+                DiceInventory.Add(diceType);
+            else
+            Debug.LogError($"Failed to add dice { data[i] }");
+            
+
+        }
+        Debug.Log($"Loading {beuhuh}");
+        
     }
 
     internal static void AddDice(ShopDice d)

@@ -329,7 +329,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c93e63086d76574493a6ca7211e6c95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::aichar
-  DiceToRoll: 0000000001000000020000000300000004000000
   maxStamina: 1
   maxHealth: 3
   textGlow: {r: 0, g: 0, b: 0, a: 1}
@@ -342,6 +341,7 @@ MonoBehaviour:
   hurtSong: {fileID: 6418180475301049370, guid: 5c1778a567b696e49a01d0fcea1b4624, type: 2}
   blov: {fileID: 6418180475301049370, guid: 8100b680b0e32a14bbd6960d249a2048, type: 2}
   help: {fileID: 6418180475301049370, guid: 03be10c3cc283cb4db6882ea3458aeab, type: 2}
+  <DiceToRoll>k__BackingField: 0000000001000000020000000300000004000000
   aIType: 0
 --- !u!82 &105240941
 AudioSource:
@@ -674,7 +674,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69f48afde6f4e8a489ee9767fd47977c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::playerchar
-  DiceToRoll: 0000000001000000020000000300000004000000
   maxStamina: 1
   maxHealth: 3
   textGlow: {r: 0, g: 0, b: 0, a: 1}
