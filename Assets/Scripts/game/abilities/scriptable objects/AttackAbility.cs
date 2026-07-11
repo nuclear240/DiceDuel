@@ -1,12 +1,10 @@
 using Cysharp.Threading.Tasks;
-using System;
-using System.Threading.Tasks;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "AttackAbility", menuName = "Ability/AttackAbility")]
 public class AttackAbility : AnilityBase
 {
+    
     [SerializeField] private string animationID = "Attack1";
     [SerializeField] private AnimationClip animation;
     [SerializeField] private int eventIndex = 1;

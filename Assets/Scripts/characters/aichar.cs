@@ -6,6 +6,15 @@ using UnityEngine;
 
 public class aichar : basechar
 {
+  [SerializeField] int MinGold;
+   [SerializeField] int MaxGold;
+    [SerializeField] private ParticleSystem coinDrop;
+    
+  
+
+
+
+
      [field: SerializeField] protected override EDiceType[] DiceToRoll { get; set; }
     public enum EAIType
     {
@@ -68,7 +77,7 @@ public class aichar : basechar
                 dicee[p - Index] = DiceToRoll[p];
             }
             Index += DiceRoll;
-            data[j] = new AbilityData(item, target, dicee, 0);
+            data[j] = new AbilityData(item, this, dicee, 0);
         }
         return data;
     }
@@ -77,4 +86,17 @@ public class aichar : basechar
     {
         throw new System.NotImplementedException();
     }
+    
+     protected override void Die()
+     {
+        base.Die();
+        ParticleSystem particles = Instantiate(coinDrop, transform.position, Quaternion.identity);
+var module = particles.emission; 
+int gold = UnityEngine.Random.Range( MinGold,  MaxGold);
+module.SetBurst(0, new ParticleSystem.Burst(0, gold));
+particles.Play();
+PlayerData.Gold += gold;
+ 
+     }
+     
 }

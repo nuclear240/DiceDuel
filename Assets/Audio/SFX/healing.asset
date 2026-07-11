@@ -6,8 +6,8 @@ AudioContainerElement:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: AudioContainerElement_{-7399246910145819903}
-  m_AudioClip: {fileID: 0}
+  m_Name: we-can-be-bees_{-7399246910145819903}
+  m_AudioClip: {fileID: 8300000, guid: b6a0416a8370a6d4f8c26e1066cf3ba3, type: 3}
   m_Volume: 0
   m_Enabled: 1
 --- !u!1233149941 &-5946356078931227142

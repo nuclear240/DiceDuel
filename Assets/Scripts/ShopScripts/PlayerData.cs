@@ -19,7 +19,7 @@ public static class PlayerData
         {
             gold = value;
             Save();
-            OnGoldUpdated();
+            OnGoldUpdated?.Invoke();
         }
     }
 
@@ -48,7 +48,7 @@ public static class PlayerData
     {
        
         string beuhuh = PlayerPrefs.GetString("beuhuh","Twenty,Eight,Ten,Six,Four");
-        int Gold = PlayerPrefs.GetInt("Gold", 100);
+        int  gold = PlayerPrefs.GetInt("Gold", 100);
         string[] data = beuhuh.Split(",");
         DiceInventory.Clear();
 

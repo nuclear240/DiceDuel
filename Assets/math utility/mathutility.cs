@@ -122,5 +122,11 @@ public static class mathutility {
 
     }
 
-
+    public static double CompoundInt(double Inv, float Rate, float taim )
+    {
+        return Inv * Mathf.Pow(1 + Rate, taim);
+    }
+    
+    
+    
 }

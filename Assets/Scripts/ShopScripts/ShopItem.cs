@@ -34,7 +34,8 @@ public class ShopItem : MonoBehaviour
 
     void UpdateButton()
     {
-        buy.interactable = PlayerData.Gold >= price;
+        buy.interactable = PlayerData.Gold >= price && PlayerData.DiceInventory.Count < 12  ;
+
     }
 
     private void OnDestroy()

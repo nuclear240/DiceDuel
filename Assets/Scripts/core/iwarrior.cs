@@ -16,4 +16,5 @@ public interface IWarrior
     EDiceType[] GetBattleDice();
     void Initialise();
     void Heal(int value);
+    UniTask UseAbilities();
 }

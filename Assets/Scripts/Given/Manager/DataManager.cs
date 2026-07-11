@@ -14,12 +14,28 @@ namespace Given.Manager
         Twenty
     }
     
+   
+    
     [DefaultExecutionOrder(-1000)]
     public class DataManager : MonoBehaviour
     {
         [SerializeField] private Sprite[] diceSprites;
         [SerializeField] private Sprite missingIcon;
 
+        [SerializeField] private ShopDice[] dice;
+
+        public ShopDice GetDice(EDiceType type)
+        {
+            switch (type)
+            {
+                case EDiceType.Four: return dice[0];
+                case EDiceType.Six: return dice[1];
+                case EDiceType.Eight: return dice[2];
+                case EDiceType.Ten: return dice[3];
+                case EDiceType.Twenty: return dice[4];
+                default: throw new ArgumentOutOfRangeException(nameof(type), type, null);
+            }
+        }
         
         public Sprite[] DiceSprites => diceSprites;
         public Sprite MissingIcon => missingIcon;

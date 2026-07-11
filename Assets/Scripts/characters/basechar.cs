@@ -19,15 +19,23 @@ public abstract class basechar : MonoBehaviour, IWarrior
    private int currentHealth;
    private int currentMaxStamina;
     protected AudioSource autosourse;
+    protected Animator currentAnim;
     [SerializeField] protected AnilityBase[] activeAbilitied;
     [SerializeField] private AudioResource hurtSong;
     [SerializeField] private AudioResource blov;
     [SerializeField] private AudioResource help;
     public List<AbilityData> abilities = new List<AbilityData>();
-
+    [SerializeField] private string animationHurt = "OnHurt";
+    [SerializeField] private string animationBlock = "Block";
+    [SerializeField] private GameObject rag;
     public IWarrior target { get; set; }
     public int Shield { get; set; }
+    private bool Kill;
 
+   
+    
+    
+    
     public virtual void Initialise()
     {
         ValidateAssignments();
@@ -36,6 +44,7 @@ public abstract class basechar : MonoBehaviour, IWarrior
         currentStamina = maxStamina;
         currentMaxStamina = maxStamina;
         autosourse = GetComponent<AudioSource>();
+        currentAnim = GetComponentInChildren<Animator>();
 
         Debug.Log($"Initialized: {currentHealth}, {currentStamina}, {currentMaxStamina}");
 
@@ -91,9 +100,11 @@ public abstract class basechar : MonoBehaviour, IWarrior
     {
         
     }
-    public async UniTask RollDice ()
+
+    public async UniTask RollDice()
     {
-        for (int j = 0; j < abilities.Count; ++ j)
+        List<UniTask<int[]>> rollForAbilities = new();
+        for (int j = 0; j < abilities.Count; ++j)
         {
             AbilityData Ability = abilities[j];
 
@@ -102,19 +113,26 @@ public abstract class basechar : MonoBehaviour, IWarrior
 
             for (int i = 0; i < Ability.dicee.Length; i += 1)
             {
-                Dice dice = DiceManager.Instance.CreateDice(Ability.dicee[i], transform.position.x < 0, Ability.bility.Color, textGlow);
+                Dice dice = DiceManager.Instance.CreateDice(Ability.dicee[i], transform.position.x < 0,
+                    Ability.bility.Color, textGlow);
 
                 tasks[i] = dice.Roll(dice.transform.forward);
 
             }
 
-            int[] num = await UniTask.WhenAll(tasks);
+            var abilityRoll = UniTask.WhenAll(tasks);
+            rollForAbilities.Add(abilityRoll);
+        }
 
+        var rolls = await UniTask.WhenAll(rollForAbilities);
+        for (int j = 0; j < rolls.Length; ++j)
+        {
+            AbilityData Ability = abilities[j];
             int sum = 0;
 
-            for (int i = 0; i < num.Length; i += 1)
+            for (int i = 0; i < rolls[j].Length; i += 1)
             {
-                sum += num[i];
+                sum += rolls[j][i];
 
             }
             Debug.Log($"Player Rolled for {Ability.bility.name} with {sum}", gameObject);
@@ -128,16 +146,22 @@ public abstract class basechar : MonoBehaviour, IWarrior
         }
        abilities =  abilities.OrderBy(a => a.bility.AbilityPriority).ToList();
 
+      
+            
+        Debug.Log($"Rolled Dice for {gameObject.name}", gameObject);
+
+    }
+
+    public async UniTask UseAbilities()
+    {
         for (int j = 0; j < abilities.Count; ++j)
         {
             AbilityData Ability = abilities[j];
             await Ability.bility.StartAbility(Ability, target);
         }
         abilities.Clear();
-            
-        Debug.Log($"Rolled Dice for {gameObject.name}", gameObject);
-
     }
+
     void RoundEnd ()
     {
 
@@ -160,7 +184,7 @@ public abstract class basechar : MonoBehaviour, IWarrior
 
     public void StartRound()
     {
-    
+      
     }
 
     public void TakeDamage(int value)
@@ -168,16 +192,13 @@ public abstract class basechar : MonoBehaviour, IWarrior
         // first, it checks if the health is > 0.
         // Then it also checks if we got hit and how much damage was done. if health =< 0, the player dies.
         
-
+        
 
         if (value <= 0) return;
 
         int DamageToFlesh = Shield - value;
 
-        if (!IsAlive())
-        {
-            Die();
-        }
+        
 
         if (DamageToFlesh >= 0)
         {
@@ -185,23 +206,33 @@ public abstract class basechar : MonoBehaviour, IWarrior
             Shield -= value;
             autosourse.resource = blov;
             autosourse.Play();
+            currentAnim.SetTrigger(animationBlock);
         }
-        else
+        else 
         {
             //attack was NOT blocked
-            currentHealth = currentHealth + Shield - DamageToFlesh;
+            currentHealth = currentHealth + Shield + DamageToFlesh;
             Shield = 0;
             autosourse.resource = hurtSong;
             autosourse.Play();
+            currentAnim.SetTrigger(animationHurt);
+        }
+        if (!IsAlive  ()&& !Kill )
+        {
+            Kill  = true;
+            Die();
         }
     }
 
     protected virtual void Die()
     {
-        // cs2 ragdoll gif + play sound
+        
         Debug.Log("weded", gameObject);
+        Instantiate(rag, transform.position,  Quaternion.identity);
+        gameObject.SetActive(false);
     }
-
+     
+   
     public EDiceType[] GetBattleDice()
     {
         return DiceToRoll;

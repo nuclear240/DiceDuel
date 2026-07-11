@@ -48,11 +48,16 @@ public class Battlemagnager
             Debug.Log("Roll Dice");
             
             await UniTask.WhenAll(leftCharacter.RollDice(), rightCharacter.RollDice());
-
+        
+            Debug.Log("Use Bility");
+            
+            await UniTask.WhenAll(leftCharacter.UseAbilities(), rightCharacter.UseAbilities());
+            
             Debug.Log("End Turn");
             
             leftCharacter.EndRound();
             rightCharacter.EndRound();
+            
             
             Debug.Log("Round Complete");
             
