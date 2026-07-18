@@ -37,7 +37,9 @@ public class AttackAbility : AnilityBase
         Vector2 myPos = player.transform.position;
         Vector2 notMyPos = enemyCharacter.transform.position;
 
-        await MoveTo(player.transform, myPos, notMyPos - (notMyPos - myPos).normalized * attackDist, moveTime);
+        //await MoveTo(player.transform, myPos, notMyPos - (notMyPos - myPos).normalized * attackDist, moveTime);
+        await MoveTo(player.transform, enemyCharacter.transform, -(notMyPos-myPos).normalized*attackDist, moveTime);
+
         await Costco(currentAnimator, DATA.value, enemyCharacter, player);
         await UniTask.Delay(1000);
         await MoveTo(player.transform, notMyPos - (notMyPos - myPos).normalized * attackDist, myPos, moveTime);
@@ -82,7 +84,23 @@ public class AttackAbility : AnilityBase
     }
 
 
-
+   //OVERLOAD: A secondary version that allows us to move to a moving target
+    private async UniTask MoveTo(Transform myTransform, Transform targetTransform, Vector3 offset, float f)
+    {
+        Vector3 playerPos = myTransform.position;
+        if (playerPos == targetTransform.position + offset) return;
+        float currentTime = 0f;
+        while (currentTime < f)
+        {
+            float t = currentTime / f;
+            // We cannot cache the position and must use targetTransform.position as it is moving every frame
+            myTransform.position = Vector3.Lerp(playerPos, targetTransform.position + offset, t); 
+            currentTime += Time.deltaTime;
+            await UniTask.Yield();
+        }
+        myTransform.position = Vector3.Lerp(playerPos, targetTransform.position + offset, 1f);
+        
+    }
 
 
     

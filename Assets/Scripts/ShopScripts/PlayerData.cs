@@ -10,6 +10,7 @@ public static class PlayerData
     private static int gold = 10;
     public static event Action OnGoldUpdated;
     public static event Action OnDiceUpdated;
+    public static event Action OnCurrenyDayUpdated;
     // we can save as different combo of 1s and 0s??
     public static List<EDiceType> DiceInventory = new();
     public static int Gold
@@ -22,10 +23,22 @@ public static class PlayerData
             OnGoldUpdated?.Invoke();
         }
     }
+    private static int currentDay = 10;
+    public static int CurrentDay => currentDay;
+
+    public static void GoToNextDay()
+    {
+        currentDay += 1;
+        OnCurrenyDayUpdated?.Invoke();
+        Save();
+    }
+
+
 
     public static void Save()
     {
         PlayerPrefs.SetInt("Gold", Gold);
+        PlayerPrefs.SetInt("Day", currentDay);
          string beuhuh = "";
 
         for (int i = 0; i < DiceInventory.Count; i += 1)
@@ -48,7 +61,8 @@ public static class PlayerData
     {
        
         string beuhuh = PlayerPrefs.GetString("beuhuh","Twenty,Eight,Ten,Six,Four");
-        int  gold = PlayerPrefs.GetInt("Gold", 100);
+        gold = PlayerPrefs.GetInt("Gold", 100);
+        currentDay = PlayerPrefs.GetInt("Day", 0);
         string[] data = beuhuh.Split(",");
         DiceInventory.Clear();
 

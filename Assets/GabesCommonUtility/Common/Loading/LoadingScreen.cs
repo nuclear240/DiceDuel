@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -77,6 +78,12 @@ namespace Common.Loading
             }
             
             SetActive(false);
+        }
+
+        private void OnDisable()
+        {
+            if(_instance == this)
+                _transitionMaterial.SetFloat(FillMatID, 0);
         }
 
         private void Start()

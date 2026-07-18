@@ -78,7 +78,12 @@ namespace Given.Manager
             gameObject.SetActive(false);
 
         }
-
+        
+        private void OnDisable()
+        {
+            if(Instance == this)
+             _targetMaterial.SetFloat(StaticUtility.TimeID, 0);
+        }
 
 
 
